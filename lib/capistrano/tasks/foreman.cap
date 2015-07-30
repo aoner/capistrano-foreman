@@ -7,7 +7,7 @@ namespace :foreman do
       
       within release_path do
         as :root do
-          execute :bundle, "exec foreman export upstart /etc/init -a #{fetch(:application)} -u #{host.user} -l #{log_path} -e #{environment_path}"
+          execute :bundle, "exec foreman export upstart /etc/init -f Procfile -a #{fetch(:application)} -u #{host.user} -l #{shared_path}/log -c sidekiq=1,clock=1"
         end
       end
     end
